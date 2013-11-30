@@ -1,5 +1,7 @@
 var lib = require('../lib');
 
+var rack = require('../rack.js');
+
 module.exports.hands = [
   {
     title: '11 222 3333 4444 55 or 55 666 7777 888 99',
@@ -17,46 +19,8 @@ module.exports.hands = [
       return counts;
     },
     hands: [
-      [
-        { value: 5, suit: 'B' },
-        { value: 5, suit: 'B' },
-
-        { value: 6, suit: 'B' },
-        { value: 6, suit: 'B' },
-        { value: 6, suit: 'B' },
-
-        { value: 7, suit: 'B' },
-        { value: 7, suit: 'B' },
-        { value: 7, suit: 'B' },
-        { value: 7, suit: 'B' },
-
-        { value: 8, suit: 'B' },
-        { value: 8, suit: 'B' },
-        { value: 8, suit: 'B' },
-
-        { value: 9, suit: 'B' },
-        { value: 9, suit: 'B' }
-      ],
-      [
-        { value: 1, suit: 'K' },
-        { value: 1, suit: 'K' },
-
-        { value: 2, suit: 'K' },
-        { value: 2, suit: 'K' },
-        { value: 2, suit: 'K' },
-
-        { value: 3, suit: 'K' },
-        { value: 3, suit: 'K' },
-        { value: 3, suit: 'K' },
-        { value: 3, suit: 'K' },
-
-        { value: 4, suit: 'K' },
-        { value: 4, suit: 'K' },
-        { value: 4, suit: 'K' },
-
-        { value: 5, suit: 'K' },
-        { value: 5, suit: 'K' }
-      ]
+      rack.parseRack('1B 1B 2B 2B 2B 3B 3B 3B 3B 4B 4B 4B 5B 5B'),
+      rack.parseRack('5B 5B 6B 6B 6B 7B 7B 7B 7B 8B 8B 8B 9B 9B')
     ]
   },
   {
@@ -74,25 +38,8 @@ module.exports.hands = [
       }
       return counts;
     },
-    hand: [
-      { value: 1, suit: 'B' },
-      { value: 1, suit: 'B' },
-
-      { value: 3, suit: 'B' },
-      { value: 3, suit: 'B' },
-      { value: 3, suit: 'B' },
-
-      { value: 5, suit: 'B' },
-      { value: 5, suit: 'B' },
-      { value: 5, suit: 'B' },
-      { value: 5, suit: 'B' },
-
-      { value: 7, suit: 'B' },
-      { value: 7, suit: 'B' },
-      { value: 7, suit: 'B' },
-
-      { value: 9, suit: 'B' },
-      { value: 9, suit: 'B' }
+    hands: [
+      rack.parseRack('1B 1B 3B 3B 3B 5B 5B 5B 5B 7B 7B 7B 9B 9B')
     ]
   },
   {
@@ -111,25 +58,8 @@ module.exports.hands = [
       }
       return counts;
     },
-    hand: [
-      { value: 2, suit: 'B' },
-      { value: 2, suit: 'B' },
-
-      { value: 4, suit: 'B' },
-      { value: 4, suit: 'B' },
-      { value: 4, suit: 'B' },
-
-      { value: 'D', suit: 'B' },
-      { value: 'D', suit: 'B' },
-      { value: 'D', suit: 'B' },
-      { value: 'D', suit: 'B' },
-
-      { value: 6, suit: 'B' },
-      { value: 6, suit: 'B' },
-      { value: 6, suit: 'B' },
-
-      { value: 8, suit: 'B' },
-      { value: 8, suit: 'B' }
+    hands: [
+      rack.parseRack('2B 2B 4B 4B 4B GD GD GD GD 6B 6B 6B 8B 8B')
     ]
   },
   {
@@ -138,27 +68,8 @@ module.exports.hands = [
       if (Object.keys(lib.countsBySuit(hand)).length !== 2) return false;
       return lib.matchesCountsByValue(hand, { F: 2, 1: 2, 2: 2, 3: 2, 4: 2, 5: 2, D: 2 });
     },
-    hand: [
-      { value: 'F' },
-      { value: 'F' },
-
-      { value: 1, suit: 'B' },
-      { value: 1, suit: 'B' },
-
-      { value: 2, suit: 'B' },
-      { value: 2, suit: 'B' },
-
-      { value: 3, suit: 'B' },
-      { value: 3, suit: 'B' },
-
-      { value: 4, suit: 'B' },
-      { value: 4, suit: 'B' },
-
-      { value: 5, suit: 'B' },
-      { value: 5, suit: 'B' },
-
-      { value: 'D', suit: 'B' },
-      { value: 'D', suit: 'B' },
+    hands: [
+      rack.parseRack('F F 1B 1B 2B 2B 3B 3B 4B 4B 5B 5B GD GD')
     ]
   },
   {
@@ -168,24 +79,8 @@ module.exports.hands = [
       if (Object.keys(lib.countsByValue(hand)).length !== 1) return false;
       return lib.matchesCountsBySuit(hand, { B: 4, K: 4, D: 4 });
     },
-    hand: [
-      { value: 'F' },
-      { value: 'F' },
-
-      { value: 1, suit: 'B' },
-      { value: 1, suit: 'B' },
-      { value: 1, suit: 'B' },
-      { value: 1, suit: 'B' },
-
-      { value: 1, suit: 'D' },
-      { value: 1, suit: 'D' },
-      { value: 1, suit: 'D' },
-      { value: 1, suit: 'D' },
-
-      { value: 1, suit: 'K' },
-      { value: 1, suit: 'K' },
-      { value: 1, suit: 'K' },
-      { value: 1, suit: 'K' }
+    hands: [
+      rack.parseRack('F F 1B 1B 1B 1B 1D 1D 1D 1D 1K 1K 1K 1K')
     ]
   },
   {
@@ -207,23 +102,8 @@ module.exports.hands = [
       }
       return matches[0] && matches[1] && matches[2];
     },
-    hand: [
-      { value: 2, suit: 'B' },
-      { value: 2, suit: 'B' },
-      { value: 4, suit: 'B' },
-      { value: 4, suit: 'B' },
-      { value: 6, suit: 'B' },
-      { value: 6, suit: 'B' },
-
-      { value: 8, suit: 'D' },
-      { value: 8, suit: 'D' },
-      { value: 8, suit: 'D' },
-      { value: 8, suit: 'D' },
-
-      { value: 8, suit: 'K' },
-      { value: 8, suit: 'K' },
-      { value: 8, suit: 'K' },
-      { value: 8, suit: 'K' }
+    hands: [
+      rack.parseRack('2B 2B 4B 4B 6B 6B 8D 8D 8D 8D 8K 8K 8K 8K')
     ]
   },
   {
@@ -232,25 +112,8 @@ module.exports.hands = [
       if (lib.spliceMatching(hand, lib.isSoap).length !== 1) return false;
       return lib.matchesCountsByValue({ N: 1, E: 2, W: 3, S: 4, 2: 1, 1: 1, 3: 1 });
     },
-    hand: [
-      { value: 'N' },
-
-      { value: 'E' },
-      { value: 'E' },
-
-      { value: 'W' },
-      { value: 'W' },
-      { value: 'W' },
-
-      { value: 'S' },
-      { value: 'S' },
-      { value: 'S' },
-      { value: 'S' },
-
-      { value: 2, suit: 'K' },
-      { value: 'D', suit: 'D' },
-      { value: 1, suit: 'K' },
-      { value: 3, suit: 'K' }
+    hands: [
+      rack.parseRack('N E E W W W S S S S 2K 0 1K 3K')
     ]
   },
   {
@@ -261,6 +124,8 @@ module.exports.hands = [
       // check for exact match on winds
       var windsMatch = { N: 2, E: 2, W: 2, S: 2 };
       if (!lib.matchesCountsByValue(winds, windsMatch)) return false;
+
+      if (Object.keys(lib.countsBySuit(hand)).length !== 1) return false;
 
       // sort remainder by value
       hand.sort(function(a, b) { return a.value - b.value; });
@@ -273,27 +138,8 @@ module.exports.hands = [
       numberMatch[N+2] = 2;
       return lib.matchesCountsByValue(hand, numberMatch);
     },
-    hand: [
-      { value: 'N' },
-      { value: 'N' },
-
-      { value: 'E' },
-      { value: 'E' },
-
-      { value: 'W' },
-      { value: 'W' },
-
-      { value: 'S' },
-      { value: 'S' },
-
-      { value: 4, suit: 'B' },
-      { value: 4, suit: 'B' },
-
-      { value: 5, suit: 'B' },
-      { value: 5, suit: 'B' },
-
-      { value: 6, suit: 'B' },
-      { value: 6, suit: 'B' },
+    hands: [
+      rack.parseRack('N N E E W W S S 4B 4B 5B 5B 6B 6B')
     ]
   },
   {
@@ -310,24 +156,8 @@ module.exports.hands = [
       }
       return true;
     },
-    hand: [
-      { value: 'F' },
-      { value: 'F' },
-
-      { value: 'D', suit: 'D' },
-      { value: 'D', suit: 'D' },
-      { value: 'D', suit: 'D' },
-      { value: 'D', suit: 'D' },
-
-      { value: 'N' },
-      { value: 'E' },
-      { value: 'W' },
-      { value: 'S' },
-
-      { value: 'D', suit: 'K' },
-      { value: 'D', suit: 'K' },
-      { value: 'D', suit: 'K' },
-      { value: 'D', suit: 'K' }
+    hands: [
+      rack.parseRack('F F 0 0 0 0 N E W S RD RD RD RD')
     ]
   }
 ];

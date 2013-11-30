@@ -8,19 +8,15 @@ module.exports.parseRack = function(rackString) {
     switch(tileChars[i]) {
       case 'F':
         tile.value = 'F';
+        tile.suit = 'F';
         break;
 
       case 'N':
-        tile.value = 'N';
-        break;
       case 'E':
-        tile.value = 'E';
-        break;
       case 'W':
-        tile.value = 'W';
-        break;
       case 'S':
-        tile.value = 'S';
+        tile.value = tileChars[i];
+        tile.suit = 'W';
         break;
 
       case 'GD':
@@ -42,7 +38,6 @@ module.exports.parseRack = function(rackString) {
         tile.suit = tileChars[i][1];
         break;
     }
-    console.error('tile', tile);
     tiles.push(tile);
   }
   return tiles;

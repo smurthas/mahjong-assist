@@ -35,6 +35,15 @@ exports.binBySuit = function binBySuit(hand) {
   return bySuit;
 }
 
+exports.binByValue = function binBySuit(hand) {
+  var bins = {};
+  hand.forEach(function(tile) {
+    if (!bins[tile.value]) bins[tile.value] = [];
+    bins[tile.value].push(tile);
+  });
+  return bins;
+}
+
 function matchesExpectedCounts (counts, expectedCounts) {
   for (var i in expectedCounts) {
     if (!counts[i] || counts[i].count !== expectedCounts[i]) return false;
@@ -59,7 +68,24 @@ exports.matchingCountOfCountsByValue  = function(set, expectedCounts) {
         count: Math.min(expectedCounts[i], totalCounts[i].count),
         tiles: totalCounts[i].tiles
       };
-      counts.tiles = counts.tiles.concat(totalCounts[i].tiles);
+      counts.tiles = counts.tiles.concat(counts[i].tiles);
+      counts._total += counts[i].count;
+    }
+  }
+  return counts;
+};
+
+exports.matchingCountOfCountsBySuit = function(set, expectedCounts) {
+  var totalCounts = exports.countsBySuit(set);
+  var counts = {_total: 0, tiles: []};
+  for (var i in expectedCounts) {
+    if (typeof totalCounts[i] === 'object') {
+      var count = Math.min(expectedCounts[i], totalCounts[i].count);
+      counts[i] = {
+        count: count,
+        tiles: totalCounts[i].tiles.slice(0, count)
+      };
+      counts.tiles = counts.tiles.concat(counts[i].tiles);
       counts._total += counts[i].count;
     }
   }

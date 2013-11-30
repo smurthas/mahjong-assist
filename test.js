@@ -18,7 +18,7 @@ function printRack(rack, matchingTiles) {
         // suits must match
         if (rack[i].suit !== matchedTile.suit) continue;
 
-        matchedIndices.push(i);
+        return matchedIndices.push(i);
       }
     });
   }
@@ -29,6 +29,7 @@ function printRack(rack, matchingTiles) {
     if (matchedIndices.indexOf(i) !== -1) {
       bottomLine += '^';
       if (suit) bottomLine += '^';
+      else bottomLine += ' ';
     } else {
       bottomLine += '  ';
     }
@@ -47,8 +48,16 @@ function doCheck(row) {
     if (row.count) {
       row.check = function() {
         var counts = row.count([].concat(row.hands[i]));
+        if (counts instanceof Array) {
+          counts.forEach(function(bestCounts) {
+            var matchedTiles = bestCounts.tiles;
+            printRack(row.hands[i], matchedTiles);
+          });
+          if (counts[0]._total === 14) return true;
+          return false;
+        }
         for (var suit in counts) {
-          var bestCountsSet = _.values(counts)[0];
+          var bestCountsSet = counts[suit];
           bestCountsSet.forEach(function(bestCounts) {
             var matchedTiles = bestCounts.tiles;
             printRack(row.hands[i], matchedTiles);

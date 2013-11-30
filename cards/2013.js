@@ -25,10 +25,6 @@ module.exports.hands = [
   },
   {
     title: '11 333 5555 777 99',
-    check: function(hand) {
-      if (Object.keys(lib.countsBySuit(hand)).length !== 1) return false;
-      return lib.matchesCountsByValue(hand, { 1: 2, 3: 3, 5: 4, 7: 3, 9: 2 });
-    },
     count: function(hand) {
       var bySuit = lib.binBySuit(hand);
       var counts = {};
@@ -44,11 +40,6 @@ module.exports.hands = [
   },
   {
     title: '22 444 DDDD 6666 88',
-    check: function(hand) {
-      if (Object.keys(lib.countsBySuit(hand)).length !== 1) return false;
-      return lib.matchesCountsByValue(hand,
-          { 2: 2, 4: 3, D: 4, 6: 3, 8: 2 });
-    },
     count: function(hand) {
       var bySuit = lib.binBySuit(hand);
       var counts = {};
@@ -64,12 +55,23 @@ module.exports.hands = [
   },
   {
     title: 'FF 11 22 33 44 55 DD',
-    check: function(hand) {
-      if (Object.keys(lib.countsBySuit(hand)).length !== 2) return false;
-      return lib.matchesCountsByValue(hand, { F: 2, 1: 2, 2: 2, 3: 2, 4: 2, 5: 2, D: 2 });
+    count: function(hand) {
+      var bins = lib.binBySuit(hand);
+      for (var suit in bins) {
+        for (var i in hand) {
+          if (hand[i].suit === 'F') bins[suit].push(hand[i]);
+        }
+      }
+      var counts = {};
+      for (var suit in bins) {
+        counts[suit] = [lib.matchingCountOfCountsByValue(bins[suit],
+          { F: 2, 1: 2, 2: 2, 3: 2, 4: 2, 5: 2, D: 2 })];
+      }
+      return counts;
     },
     hands: [
-      rack.parseRack('F F 1B 1B 2B 2B 3B 3B 4B 4B 5B 5B GD GD')
+      rack.parseRack('F F 1B 1B 2B 2B 3B 3B 4B 4B 5B 5B GD GD'),
+      rack.parseRack('F F 1B 1B 2B 2B 3B 3B 4B 4B 5B 5B GD RD')
     ]
   },
   {
@@ -79,31 +81,64 @@ module.exports.hands = [
       if (Object.keys(lib.countsByValue(hand)).length !== 1) return false;
       return lib.matchesCountsBySuit(hand, { B: 4, K: 4, D: 4 });
     },
+    count: function(rack) {
+      var bins = lib.binByValue(rack);
+      for (var value in bins) {
+        if (value === 'F') continue;
+        bins[value] = bins[value].concat(bins.F);
+      }
+      delete bins.F;
+
+      var counts = {};
+      for (var value in bins) {
+        counts[value] = [lib.matchingCountOfCountsBySuit(bins[value],
+            { F: 2, B: 4, K: 4, D: 4})];
+      }
+      return counts;
+    },
     hands: [
-      rack.parseRack('F F 1B 1B 1B 1B 1D 1D 1D 1D 1K 1K 1K 1K')
+      rack.parseRack('F F 1B 1B 1B 1B 1D 1D 1D 1D 1K 1K 1K 1K'),
+      rack.parseRack('F F 1B 1B 1B 1B 1D 1D 1D 1D 1K 1K 1K 1D')
     ]
   },
   {
     title: '22 44 66, 8888, 8888 (any 3 Suits)',
-    check: function(hand) {
-      var bySuit = lib.binBySuit(hand);
-      // 0 = 2-6, 1 = 8888, 2 = 8888
-      var matches = [];
+    count: function(rack) {
+      var bin = lib.binBySuit(rack);
+      var combos = [['B','D','K'], ['B','K','D'],
+                    ['D','B','K'], ['D','K','B'],
+                    ['K','B','D'], ['K','D','B']];
       var matchers = [
         { 2: 2, 4: 2, 6: 2 },
         { 8: 4 },
         { 8: 4 }
       ];
-      for (var suit in bySuit) {
-        var set = bySuit[suit];
-        for (var i in matchers) {
-          if (lib.matchesCountsByValue(set, matchers[i])) matches[i] = true;
+
+      var counts = [];
+      for (var i in combos) {
+        var combo = combos[i];
+        var comboCounts = [];
+        for (var j in combo) {
+          var suit = combo[j];
+          var theseComboCounts =
+            lib.matchingCountOfCountsByValue(bin[suit], matchers[j]);
+          comboCounts.push(theseComboCounts);
         }
+        counts[i] = comboCounts[0];
+        counts[i]._total += comboCounts[1]._total;
+        counts[i]._total += comboCounts[2]._total;
+        counts[i].tiles = counts[i].tiles.concat(comboCounts[1].tiles)
+            .concat(comboCounts[2].tiles);
       }
-      return matches[0] && matches[1] && matches[2];
+      counts.sort(function(a, b) {
+        return b._total - a._total;
+      });
+      return counts;
     },
     hands: [
-      rack.parseRack('2B 2B 4B 4B 6B 6B 8D 8D 8D 8D 8K 8K 8K 8K')
+      rack.parseRack('2B 2B 4B 4B 6B 6B 8D 8D 8D 8D 8K 8K 8K 8K'),
+      rack.parseRack('2B 2B 4B 4B 6B 6B 8D 8D 8D 8D 8K 8K 8K 7K'),
+      rack.parseRack('2B 1B 4B 4B 6B 6B 8D 2D 8D 8D 8K 8K 8K 7K')
     ]
   },
   {
@@ -111,6 +146,26 @@ module.exports.hands = [
     check: function(hand) {
       if (lib.spliceMatching(hand, lib.isSoap).length !== 1) return false;
       return lib.matchesCountsByValue({ N: 1, E: 2, W: 3, S: 4, 2: 1, 1: 1, 3: 1 });
+    },
+    count: function(rack) {
+      var soap = lib.spliceMatching(rack, lib.isSoap);
+      var winds = lib.spliceMatching(rack, lib.isWind);
+      winds = lib.matchingCountOfCountsByValue(winds, {N:1, E:2, W:3, S:4}).tiles;
+      var bins = lib.binBySuit(rack);
+
+      var counts = [];
+      if (Object.keys(bins).length < 3) bins._ = {_totals:0, tiles:[]};
+      for (var suit in bins) {
+        var theseCounts = {_total:winds.length, tiles:winds};
+        if (soap[0]) {
+          theseCounts._total++;
+          theseCounts.tiles.push(soap[0]);
+        }
+        theseCounts._total += bins[suit].length;
+        theseCounts.tiles = theseCounts.tiles.concat(bins[suit]);
+        counts.push(theseCounts);
+      }
+      return counts;
     },
     hands: [
       rack.parseRack('N E E W W W S S S S 2K 0 1K 3K')

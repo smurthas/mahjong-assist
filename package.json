@@ -1,0 +1,15 @@
+{
+  "name": "mahjong",
+  "version": "0.0.0",
+  "description": "Mahjong assistance",
+  "main": "card.js",
+  "dependencies": {
+    "underscore": "~1.5.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Simon Murtha Smith <simon@murtha-smith.com>",
+  "license": "MIT"
+}

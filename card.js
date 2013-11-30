@@ -1,14 +1,58 @@
+var _ = require('underscore');
+
 var lib = require('./lib');
+
+
+function printRack(rack, matchingTiles) {
+  var topLine = '', bottomLine = '';
+
+  var matchedIndices = [];
+  if (matchingTiles) {
+    matchingTiles.forEach(function(matchedTile) {
+      for (var i in rack) {
+        // already matched, skip it
+        if (matchedIndices.indexOf(i) !== -1) continue;
+
+        // values must match always
+        if (rack[i].value !== matchedTile.value) continue;
+
+        // suits must match
+        if (rack[i].suit !== matchedTile.suit) continue;
+
+        matchedIndices.push(i);
+      }
+    });
+  }
+
+  for (var i in rack) {
+    var suit = rack[i].suit;
+    topLine += rack[i].value + (suit? suit : ' ') + ' ';
+    if (matchedIndices.indexOf(i) !== -1) {
+      bottomLine += '^';
+      if (suit) bottomLine += '^';
+    } else {
+      bottomLine += '  ';
+    }
+    bottomLine += ' ';
+  }
+  console.log(topLine);
+  console.log(bottomLine);
+}
 
 var card = {
   '11 222 3333 4444 55 or 55 666 7777 888 99': {
-    check: function(hand) {
-      if (Object.keys(lib.countsBySuit(hand)).length !== 1) return false;
-      return lib.matchesCountsByValue(hand, { 1: 2, 2: 3, 3: 4, 4: 3, 5: 2 }) ||
-        lib.matchesCountsByValue(hand, { 5: 2, 6: 3, 7: 4, 8: 3, 9: 2 });
-    },
     count: function(hand) {
-      console.log(lib.countsBySuit(hand));
+      var counts = {};
+      var bySuit = lib.binBySuit(hand);
+      for (var suit in bySuit) {
+        counts[suit] = [];
+        counts[suit].push(lib.matchingCountOfCountsByValue(hand,
+          { 1: 2, 2: 3, 3: 4, 4: 3, 5: 2}));
+        counts[suit].push(lib.matchingCountOfCountsByValue(hand,
+          { 5: 2, 6: 3, 7: 4, 8: 3, 9: 2 }));
+        counts[suit].sort(function(a, b) { return b._total - a._total; });
+      }
+      return counts;
     },
     hands: [
       [
@@ -58,6 +102,15 @@ var card = {
       if (Object.keys(lib.countsBySuit(hand)).length !== 1) return false;
       return lib.matchesCountsByValue(hand, { 1: 2, 3: 3, 5: 4, 7: 3, 9: 2 });
     },
+    count: function(hand) {
+      var bySuit = lib.binBySuit(hand);
+      var counts = {};
+      for (var suit in bySuit) {
+        counts[suit] = [lib.matchingCountOfCountsByValue(bySuit[suit],
+          { 1: 2, 3: 3, 5: 4, 7: 3, 9: 2})];
+      }
+      return counts;
+    },
     hand: [
       { value: 1, suit: 'B' },
       { value: 1, suit: 'B' },
@@ -82,7 +135,17 @@ var card = {
   '22 444 DDDD 6666 88': {
     check: function(hand) {
       if (Object.keys(lib.countsBySuit(hand)).length !== 1) return false;
-      return lib.matchesCountsByValue(hand, { 2: 2, 4: 3, D: 4, 6: 3, 8: 2 });
+      return lib.matchesCountsByValue(hand,
+          { 2: 2, 4: 3, D: 4, 6: 3, 8: 2 });
+    },
+    count: function(hand) {
+      var bySuit = lib.binBySuit(hand);
+      var counts = {};
+      for (var suit in bySuit) {
+        counts[suit] = [lib.matchingCountOfCountsByValue(bySuit[suit],
+          { 2: 2, 4: 3, D: 4, 6: 3, 8: 2 })];
+      }
+      return counts;
     },
     hand: [
       { value: 2, suit: 'B' },
@@ -135,8 +198,8 @@ var card = {
   },
   'FF 1111 1111 1111': {
     check: function(hand) {
-      if (Object.keys(lib.countsByValue(hand)).length !== 2) return false;
       if (lib.spliceMatching(hand, lib.isFlower).length !== 2) return false;
+      if (Object.keys(lib.countsByValue(hand)).length !== 1) return false;
       return lib.matchesCountsBySuit(hand, { B: 4, K: 4, D: 4 });
     },
     hand: [
@@ -198,7 +261,6 @@ var card = {
   },
   'N EE WWW SSSS 2013': {
     check: function(hand) {
-      //console.error('lib.spliceMatching(hand, lib.isSoap)', lib.spliceMatching(hand, lib.isSoap));
       if (lib.spliceMatching(hand, lib.isSoap).length !== 1) return false;
       return lib.matchesCountsByValue({ N: 1, E: 2, W: 3, S: 4, 2: 1, 1: 1, 3: 1 });
     },
@@ -301,13 +363,39 @@ var card = {
 };
 
 
-function doCheck(i, check, hand) {
-  if (!check(hand)) console.log('"%s" doesn\'t match.', i);
+function doCheck(i, row) {
+  console.log('\n=========================================');
+  console.log('[', i, ']');
+  for (var j in row.hands) {
+    if (row.count) {
+      row.check = function() {
+        var counts = row.count([].concat(row.hands[j]));
+        for (var suit in counts) {
+          var bestCountsSet = _.values(counts)[0];
+          bestCountsSet.forEach(function(bestCounts) {
+            var matchedTiles = bestCounts.tiles;
+            printRack(row.hands[j], matchedTiles);
+          });
+          if (counts[suit][0]._total === 14) return true;
+        }
+        return false;
+      };
+    }
+
+    var failed = false;
+    try {
+      failed = !row.check(row.hands[j]);
+    } catch(err) {
+      failed = err;
+    }
+    if (failed) {
+      console.log('"%s" doesn\'t match.', i);
+      if (failed instanceof Error) throw failed;
+    }
+  }
 }
 
 for (var i in card) {
-  if (card[i].hand) doCheck(i, card[i].check, card[i].hand);
-  if (card[i].hands) {
-    for (var j in card[i].hands) doCheck(i, card[i].check, card[i].hands[j]);
-  }
+  if (card[i].hand) card[i].hands = [card[i].hand];
+  doCheck(i, card[i]);
 }

@@ -37,7 +37,7 @@ exports.binBySuit = function binBySuit(hand) {
 
 function matchesExpectedCounts (counts, expectedCounts) {
   for (var i in expectedCounts) {
-    if (counts[i] !== expectedCounts[i]) return false;
+    if (!counts[i] || counts[i].count !== expectedCounts[i]) return false;
   }
   return true;
 }
@@ -50,13 +50,30 @@ exports.matchesCountsBySuit = function(set, expectedCounts) {
   return matchesExpectedCounts(exports.countsBySuit(set), expectedCounts);
 }
 
+exports.matchingCountOfCountsByValue  = function(set, expectedCounts) {
+  var totalCounts = exports.countsByValue(set);
+  var counts = {_total: 0, tiles: []};
+  for (var i in expectedCounts) {
+    if (typeof totalCounts[i] === 'object') {
+      counts[i] = {
+        count: Math.min(expectedCounts[i], totalCounts[i].count),
+        tiles: totalCounts[i].tiles
+      };
+      counts.tiles = counts.tiles.concat(totalCounts[i].tiles);
+      counts._total += counts[i].count;
+    }
+  }
+  return counts;
+};
+
 exports.countsByValue = function(hand) {
   var counts = {};
   for (var i in hand) {
     var tile = hand[i];
     // numbers
-    if (!counts[tile.value]) counts[tile.value] = 0;
-    counts[tile.value]++;
+    if (!counts[tile.value]) counts[tile.value] = {count: 0, tiles: []};
+    counts[tile.value].count++;
+    counts[tile.value].tiles.push(tile);
   }
   return counts;
 }
@@ -65,11 +82,11 @@ exports.countsBySuit = function(hand) {
   var counts = {};
   for (var i in hand) {
     var suit = hand[i].suit || 'none';
-    if (!counts[suit]) counts[suit] = 0;
-    counts[suit]++;
+    if (!counts[suit]) counts[suit] = {count: 0, tiles: []};
+    counts[suit].count++;
+    counts[suit].tiles.push(hand[i]);
   }
   return counts;
-
 }
 
 exports.valueCountsBySuit = function(hand) {

@@ -8,7 +8,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -R spec"
   },
   "author": "Simon Murtha Smith <simon@murtha-smith.com>",
   "license": "MIT"

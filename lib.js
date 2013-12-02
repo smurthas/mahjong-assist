@@ -156,7 +156,6 @@ exports.generatePermutations = function(base) {
   var perms = [];
   var suitPermCount = 0;
   var numberCount = 0;
-  console.error('XYZ.split()', 'XYZ'.split(''));
   ['X','Y','Z'].forEach(function(letter) {
     if (base.indexOf(letter) !== -1) suitPermCount++;
   });
@@ -214,4 +213,18 @@ exports.matchingTiles = function(_rack, hand) {
   }
 
   return matchingTiles;
+}
+
+exports.checkAndSortPermutations = function(rack, permutations) {
+  var matchingSets = [];
+  permutations.forEach(function(hand) {
+    matchingSets.push({
+      matched: exports.matchingTiles(rack, hand),
+      hand: hand
+    });
+  });
+  matchingSets.sort(function(a, b) {
+    return b.matched.length - a.matched.length;
+  });
+  return matchingSets;
 }

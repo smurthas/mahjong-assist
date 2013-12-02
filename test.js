@@ -1,3 +1,4 @@
+var assert = require('assert');
 var _ = require('underscore');
 
 var card = require('./cards/2013.js').hands;
@@ -52,16 +53,7 @@ function doCheck(row) {
     }
     console.log(row.permutations.length);
     row.hands.forEach(function(rack) {
-      var matchingSets = [];
-      row.permutations.forEach(function(hand) {
-        matchingSets.push({
-          matched: lib.matchingTiles(rack, hand),
-          hand: hand
-        });
-      });
-      matchingSets.sort(function(a, b) {
-        return b.matched.length - a.matched.length;
-      });
+      var matchingSets = lib.checkAndSortPermutations(rack, row.permutations);
       matchingSets.forEach(function(matchingSet) {
         printRack(matchingSet.hand);
         printRack(rack, matchingSet.matched);

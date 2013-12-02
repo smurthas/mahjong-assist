@@ -1,4 +1,3 @@
-
 module.exports.parseRack = function(rackString) {
   rackString = rackString.toUpperCase();
   var tiles = [];
@@ -20,14 +19,17 @@ module.exports.parseRack = function(rackString) {
         break;
 
       case 'GD':
+      case 'DB':
         tile.value = 'D';
         tile.suit = 'B';
         break;
       case 'RD':
+      case 'DK':
         tile.value = 'D';
         tile.suit = 'K';
         break;
       case 'BD':
+      case 'DD':
       case '0':
         tile.value = 'D';
         tile.suit = 'D';

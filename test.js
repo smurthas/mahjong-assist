@@ -2,6 +2,8 @@ var _ = require('underscore');
 
 var card = require('./cards/2013.js').hands;
 
+var lib = require('./lib.js');
+
 function printRack(rack, matchingTiles) {
   var topLine = '', bottomLine = '';
 
@@ -44,40 +46,28 @@ function printRack(rack, matchingTiles) {
 function doCheck(row) {
   console.log('\n=========================================');
   console.log('[', row.title, ']');
-  for (var i in row.hands) {
-    if (row.count) {
-      row.check = function() {
-        var counts = row.count([].concat(row.hands[i]));
-        if (counts instanceof Array) {
-          counts.forEach(function(bestCounts) {
-            var matchedTiles = bestCounts.tiles;
-            printRack(row.hands[i], matchedTiles);
-          });
-          if (counts[0]._total === 14) return true;
-          return false;
-        }
-        for (var suit in counts) {
-          var bestCountsSet = counts[suit];
-          bestCountsSet.forEach(function(bestCounts) {
-            var matchedTiles = bestCounts.tiles;
-            printRack(row.hands[i], matchedTiles);
-          });
-          if (counts[suit][0]._total === 14) return true;
-        }
-        return false;
-      };
+  if (row.permutations) {
+    if (typeof row.permutations === 'string') {
+      row.permutations = lib.generatePermutations(row.permutations);
     }
-
-    var failed = false;
-    try {
-      failed = !row.check(row.hands[i]);
-    } catch(err) {
-      failed = err;
-    }
-    if (failed) {
-      console.log('"%s" doesn\'t match.', row.title);
-      if (failed instanceof Error) throw failed;
-    }
+    console.log(row.permutations.length);
+    row.hands.forEach(function(rack) {
+      var matchingSets = [];
+      row.permutations.forEach(function(hand) {
+        matchingSets.push({
+          matched: lib.matchingTiles(rack, hand),
+          hand: hand
+        });
+      });
+      matchingSets.sort(function(a, b) {
+        return b.matched.length - a.matched.length;
+      });
+      matchingSets.forEach(function(matchingSet) {
+        printRack(matchingSet.hand);
+        printRack(rack, matchingSet.matched);
+      });
+    });
+    return;
   }
 }
 

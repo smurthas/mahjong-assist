@@ -1,3 +1,5 @@
+var parseRack = require('./rack.js').parseRack;
+var SUIT_PERMS = ['BDK', 'BKD','DBK', 'DKB', 'KBD', 'KDB'];
 
 exports.isWind = function isWind(tile) {
   return tile.value === 'N' || tile.value === 'S' || tile.value === 'E' ||
@@ -150,3 +152,66 @@ exports.exactMatchSuits = function(hand, expectedCounts) {
   return true;
 }
 
+exports.generatePermutations = function(base) {
+  var perms = [];
+  var suitPermCount = 0;
+  var numberCount = 0;
+  console.error('XYZ.split()', 'XYZ'.split(''));
+  ['X','Y','Z'].forEach(function(letter) {
+    if (base.indexOf(letter) !== -1) suitPermCount++;
+  });
+  ['T','U','V'].forEach(function(letter) {
+    if (base.indexOf(letter) !== -1) numberCount++;
+  });
+
+  var N;
+  if (numberCount === 0) N = 2;
+  else N = 11 - numberCount;
+
+  if (suitPermCount === 0) {
+    perms.push(parseRack(base));
+  } else if (suitPermCount === 1) {
+    for (var i = 1; i < N; i++) {
+      for (var j in SUIT_PERMS[0]) {
+        var p = base.replace(/T/g, i).replace(/U/g, i+1).replace(/V/g, i+2);
+        p = p.replace(/X/g, SUIT_PERMS[0][j]);
+        perms.push(parseRack(p));
+      }
+    }
+  } else {
+    for (var i = 1; i < N; i++) {
+      for (var j in SUIT_PERMS) {
+        var p = base.replace(/T/g, i).replace(/U/g, i+1).replace(/V/g, i+2);
+        p = p.replace(/X/g, SUIT_PERMS[j][0]).replace(/Y/g, SUIT_PERMS[j][1])
+             .replace(/Z/g, SUIT_PERMS[j][2]);
+        perms.push(parseRack(p));
+      }
+    }
+  }
+  return perms;
+}
+
+exports.matchingTiles = function(_rack, hand) {
+  // collect the results here
+  var matchingTiles = [];
+
+  // clone the array so we can remove matched elements
+  var rack = [];
+  for (var i in _rack) rack.push(_rack[i]);
+
+  // for every tile in the hand
+  for(var i in hand) {
+    // for every tile in the rack (clone)
+    for (var j in rack) {
+      // if it's a match, add the tile to the matching set and remove it from
+      // the rack so it doesn't get matched twice
+      if (rack[j].suit === hand[i].suit && rack[j].value === hand[i].value) {
+        matchingTiles.push(rack[j]);
+        rack.splice(j, 1);
+        break;
+      }
+    }
+  }
+
+  return matchingTiles;
+}

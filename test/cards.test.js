@@ -15,6 +15,13 @@ for (var i in testRacks) {
     var perms = card[i].permutations;
     if (typeof perms === 'string') perms = lib.generatePermutations(perms);
 
+    var testRack = testRacks[i];
+    var hand = card[i];
+    describe('permutation count', function() {
+      it('should match', function() {
+        assert.equal(hand.permutations.length, testRack.permutations);
+      });
+    });
     testRacks[i].mahjong.forEach(function(rack) {
       describe(rack, function() {
         it('should match for mahjong', function() {
@@ -30,7 +37,8 @@ for (var i in testRacks) {
         it('should match '+ countsTestObject.count + ' tiles', function() {
           var rack = parseRack(countsTestObject.rack);
           var matchedSets = lib.checkAndSortPermutations(rack, perms);
-          assert.equal(matchedSets[0].matched.length, countsTestObject.count);
+          assert.equal(matchedSets[0].matched.length, countsTestObject.count,
+            JSON.stringify(matchedSets[0].matched));
         });
 
       });

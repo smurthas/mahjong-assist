@@ -10,7 +10,8 @@ module.exports = [
         rack: 'N F E F W W F S S S 3K 0 1K 3K',
         count: 10
       }
-    ]
+    ],
+    permutations: 3
   },
   {
     mahjong: [
@@ -21,7 +22,8 @@ module.exports = [
         rack: 'N F E F W W F S S S 3K 0 1K 3K',
         count: 5
       }
-    ]
+    ],
+    permutations: 6
   },
   {
     mahjong: [
@@ -32,7 +34,8 @@ module.exports = [
         rack: 'F F E F 4K 2K 2B 2K RD DD 0 N 1K 3K',
         count: 9
       }
-    ]
+    ],
+    permutations: 3
   },
 
   {
@@ -44,7 +47,8 @@ module.exports = [
         rack: '2B 2B 4B 4B 4B RD DD GD GD 6B 6B 6B F 8B',
         count: 11
       }
-    ]
+    ],
+    permutations: 3
   },
   {
     mahjong: [
@@ -59,7 +63,8 @@ module.exports = [
         rack: '2B 1B 4B 4B 6B 6B 8D 2D 8D 8D 8K 8K 8K 7K',
         count: 11
       }
-    ]
+    ],
+    permutations: 6
   },
   {
     mahjong: [
@@ -74,7 +79,8 @@ module.exports = [
         rack: 'N F 3B 2B 2B 2B 4D 5D 6D 6D 8B 8B 8B 8K',
         count: 10
       }
-    ]
+    ],
+    permutations: 6
   },
   {
     mahjong: [
@@ -89,7 +95,8 @@ module.exports = [
         rack: 'N F 2B 2B 2B 4B 4B 5D 6D 6D 8D 8B 8B 8K',
         count: 8
       }
-    ]
+    ],
+    permutations: 6
   },
   {
     mahjong: [
@@ -104,7 +111,8 @@ module.exports = [
         rack: 'N F 2B 2B 2B 4B 4B 5D 6D 6D 8D 8B 8B 8K',
         count: 7
       }
-    ]
+    ],
+    permutations: 6
   },
   {
     mahjong: [
@@ -119,8 +127,11 @@ module.exports = [
         rack: 'N F 2B 2B 2B 4B 4B 5D 6D 6D 8D 8B 8B 8K',
         count: 8
       }
-    ]
+    ],
+    permutations: 3
   },
+
+  // LIKE NUMBERS
   {
     mahjong: [
       'F F 1B 1B 1B 1B 1D 1D 1D 1D 1K 1K 1K 1K'
@@ -134,7 +145,8 @@ module.exports = [
         rack: 'F F 1B 1B 1B 1B 1D 1D 1D 1D 1K 1K 1K 1D',
         count: 13
       }
-    ]
+    ],
+    permutations: 6*9
   },
   {
     mahjong: [
@@ -150,8 +162,11 @@ module.exports = [
         rack: 'F F 1B 1B 1B 1B 1D 1D 1D 1D 1K 1K 1K 1D',
         count: 9
       }
-    ]
+    ],
+    permutations: 6*9
   },
+
+  // SEVEN HANDS
   {
     mahjong: [
       'F F F F 1B 1B 1B 1B 6D 6D 7K 7K 7K 7K',
@@ -166,7 +181,8 @@ module.exports = [
         rack: 'F F 1B 1B 1B 1B 6D 6D 1K 1K 7K 7K 7K 7D',
         count: 11
       }
-    ]
+    ],
+    permutations: 3+6
   },
   {
     mahjong: [
@@ -182,7 +198,8 @@ module.exports = [
         rack: 'F F 2B 2B 2B 2B 5D 5D 2K 2K 7K 7K 7K 7D',
         count: 11
       }
-    ]
+    ],
+    permutations: 3+6
   },
   {
     mahjong: [
@@ -198,9 +215,30 @@ module.exports = [
         rack: 'F F 3B 3B 3B 3B 4D 4D 3K 3K 7K 7K 7K 7D',
         count: 11
       }
-    ]
+    ],
+    permutations: 3+6
   },
 
+
+  // QUINTS
+  {
+    mahjong: [
+      '3B 4B 4B 5B 4D 4D 4D 4D 4D 4K 4K 4K 4K 4K'
+    ],
+    counts: [
+      {
+        rack:'F 3K 3K 4K 5K 3B 3D 3D W W N 3B N F',
+        count: 8
+      },
+      {
+        rack:'F 3K 3K 4K 5K 3B 3D 3D DD 1D 3K 3B 7K 1K',
+        count: 8
+      }
+    ],
+    permutations: 42*3
+  },
+
+  // CONSECUTIVE RUN
   {
     mahjong: [
       '1B 1B 2B 2B 2B 3B 3B 3B 3B 4B 4B 4B 5B 5B',
@@ -211,7 +249,8 @@ module.exports = [
         rack: '1B 1D 2B 7K 5B 4B 4D 5B 3B 8B 6K 3K 1B F',
         count: 7
       }
-    ]
+    ],
+    permutations: 6
   },
   {
     mahjong: [
@@ -222,7 +261,8 @@ module.exports = [
         rack: '1B 1B 5K 3B 3B 5B 5B 9B 8B 7B 7B 7B 9B 9B',
         count: 11
       }
-    ]
+    ],
+    permutations: 3
   },
   {
     mahjong: [
@@ -233,7 +273,8 @@ module.exports = [
         rack: 'F F 1B 1B 2B 2B 3B 3B 4B 4B 5B 5B GD RD',
         count: 13
       }
-    ]
+    ],
+    permutations: 3
   },
   {
     mahjong: [
@@ -246,7 +287,8 @@ module.exports = [
         rack: 'N E W S W E N S 3K 5K 6K F F F',
         count: 10
       }
-    ]
+    ],
+    permutations: 7*3
   },
   {
     mahjong: [
@@ -257,6 +299,7 @@ module.exports = [
         rack: 'F F DD DD N E S RD RD RD 1K 2K 3K 4D',
         count: 10
       }
-    ]
+    ],
+    permutations: 6
   }
 ];

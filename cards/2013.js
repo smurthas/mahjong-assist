@@ -43,6 +43,8 @@ module.exports.hands = [
     title: 'FF 222 444 666 888',
     permutations: 'F F 2X 2X 2X 4X 4X 4X 6X 6X 6X 8X 8X 8X'
   },
+
+  // LIKE NUMBERS
   {
     title: 'FF 1111 1111 1111 (Any Like No.)',
     permutations: 'F F TX TX TX TX TY TY TY TY TZ TZ TZ TZ'
@@ -51,6 +53,8 @@ module.exports.hands = [
     title: '11 DD 111 DDD 1111 (Any Like No., Matching Dragon)',
     permutations: 'TX TX DX DX TY TY TY DY DY DY TZ TZ TZ TZ'
   },
+
+  // SEVEN HANDS
   {
     title: 'FFFF 1111 + 66 = 7777 or (Any 3 Suits)',
     permutations: [
@@ -73,6 +77,17 @@ module.exports.hands = [
     ]
   },
 
+  // QUINTS
+  {
+    title: '1223 22222 22222 (Any 3 Consec. Nos; Pr. Any No in Run; Pr. & Quints Match',
+    permutations: [
+      'TX UX UX VX UY UY UY UY UY UZ UZ UZ UZ UZ',
+      'TX UX VX VX VY VY VY VY VY VZ VZ VZ VZ VZ',
+      'TX TX UX VX TY TY TY TY TY TZ TZ TZ TZ TZ'
+    ]
+  },
+
+  // CONSECUTIVE RUN
   {
     title: '11 222 3333 4444 55 or 55 666 7777 888 99',
     permutations: [

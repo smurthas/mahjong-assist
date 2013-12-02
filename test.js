@@ -1,7 +1,9 @@
 var assert = require('assert');
 var _ = require('underscore');
+var Card = require('./card.js');
+var parseRack = require('./rack.js').parseRack;
 
-var card = require('./cards/2013.js').hands;
+var _2013 = new Card(require('./cards/2013.js').hands);
 
 var lib = require('./lib.js');
 
@@ -63,7 +65,11 @@ function doCheck(row) {
   }
 }
 
-for (var i in card) {
+var rack = parseRack('F F 0 GD 1B 1B 2B 4K 7K 8D N W 5K 4B')
+console.log(JSON.stringify(lib.countsForRack(_2013, rack),2,2));
+//console.log(lib.countsForRack(_2013, rack));
+
+/*for (var i in card) {
   if (card[i].hand) card[i].hands = [card[i].hand];
   doCheck(card[i]);
-}
+}*/

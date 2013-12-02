@@ -220,7 +220,7 @@ exports.checkAndSortPermutations = function(rack, permutations) {
   permutations.forEach(function(hand) {
     matchingSets.push({
       matched: exports.matchingTiles(rack, hand),
-      hand: hand
+      permutation: hand
     });
   });
   matchingSets.sort(function(a, b) {
@@ -228,3 +228,22 @@ exports.checkAndSortPermutations = function(rack, permutations) {
   });
   return matchingSets;
 }
+
+exports.countsForRack = function(card, rack) {
+  var handMatches = [];
+  card.forEach(function(hand) {
+    var matches = exports.checkAndSortPermutations(rack, hand.permutations);
+    handMatches.push({
+      matches: matches,
+      hand: hand
+    });
+  });
+  handMatches.sort(function(a, b) {
+    if (!b.matches.length && !a.matches.length) return 0;
+    if (!b.matches.length && a.matches.length) return 1;
+    if (b.matches.length && !a.matches.length) return -1;
+    return b.matches[0].matched.length - a.matches[0].matched.length;
+  })
+  return handMatches;
+};
+

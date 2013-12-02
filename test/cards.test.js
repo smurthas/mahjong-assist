@@ -1,7 +1,8 @@
 var assert = require('assert');
 
+var Card = require('../card.js');
 
-var card = require('../cards/2013.js').hands;
+var card = new Card(require('../cards/2013.js').hands);
 
 var testRacks = require('./cards/2013.test.js');
 

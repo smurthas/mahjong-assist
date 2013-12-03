@@ -219,7 +219,7 @@ module.exports = [
     permutations: 3+6
   },
 
-
+/*
   // QUINTS
   {
     mahjong: [
@@ -237,6 +237,57 @@ module.exports = [
     ],
     permutations: 42*3
   },
+  {
+    mahjong: [
+      'N N N N N DD DD DD DD 1K 1K 1K 1K 1K',
+      'N N N N N RD RD RD RD 3K 3K 3K 3K 3K',
+    ],
+    counts: [
+      {
+        rack:'N DK DK DK N N 3D 3D W W N 3B N F',
+        count: 10
+      },
+      {
+        rack:'E E E 4K 4K RD RD RD DD RD 4K 3B 7K 1K',
+        count: 10
+      }
+    ],
+    permutations: 4*3*3*9
+  },
+  {
+    mahjong: [
+      'F F F F 1D 1D 1D 1D 1D 2B 2B 2B 2B 2B',
+      'F F F F 4D 4D 4D 4D 4D 5B 5B 5B 5B 5B',
+    ],
+    counts: [
+      {
+        rack:'N DK DK DK N N 3D 3D W W N 3B N F',
+        count: 3
+      },
+      {
+        rack:'F F E 4K 4K 5D 5D 5D 5D 4D 4K 3B 7K 1K',
+        count: 9
+      }
+    ],
+    permutations: 8*6
+  },
+  {
+    mahjong: [
+      '3B 3B 3B 3B 3B 4B 4B 4B 4B 5B 5B 5B 5B 5B'
+    ],
+    counts: [
+      {
+        rack:'N 4K 4K 4K N N 3K 3K W W N 3B N F',
+        count: 5
+      },
+      {
+        rack:'F F E 4K 4K 5K 5K 5K 5K 4K 4K 6B 6K 1K',
+        count: 9
+      }
+    ],
+    permutations: 7*3
+  },*/
+
 
   // CONSECUTIVE RUN
   {

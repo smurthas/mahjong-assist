@@ -247,3 +247,39 @@ exports.countsForRack = function(card, rack) {
   return handMatches;
 };
 
+exports.printRack = function printRack(rack, matchingTiles) {
+  var topLine = '', bottomLine = '';
+
+  var matchedIndices = [];
+  if (matchingTiles) {
+    matchingTiles.forEach(function(matchedTile) {
+      for (var i in rack) {
+        // already matched, skip it
+        if (matchedIndices.indexOf(i) !== -1) continue;
+
+        // values must match always
+        if (rack[i].value !== matchedTile.value) continue;
+
+        // suits must match
+        if (rack[i].suit !== matchedTile.suit) continue;
+
+        return matchedIndices.push(i);
+      }
+    });
+  }
+
+  for (var i in rack) {
+    var suit = rack[i].suit;
+    topLine += rack[i].value + (suit? suit : ' ') + ' ';
+    if (matchedIndices.indexOf(i) !== -1) {
+      bottomLine += '^';
+      if (suit) bottomLine += '^';
+      else bottomLine += ' ';
+    } else {
+      bottomLine += '  ';
+    }
+    bottomLine += ' ';
+  }
+  console.log(topLine);
+  console.log(bottomLine);
+}

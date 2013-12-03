@@ -6,6 +6,7 @@ var SUITS = ['B', 'D', 'K'];
 var SUIT_PERMS = ['BDK', 'BKD','DBK', 'DKB', 'KBD', 'KDB'];
 
 module.exports.hands = [
+  // 2013
   {
     title: 'N EE WWW SSSS 2013',
     permutations: 'N E E W W W S S S S 2X 0 1X 3X'
@@ -19,6 +20,7 @@ module.exports.hands = [
     permutations: 'F F F F 2X 2X 2X 2X 0 0 0 0 1X 3X'
   },
 
+  // 2468
   {
     title: '22 444 DDDD 666 88',
     permutations: '2X 2X 4X 4X 4X DX DX DX DX 6X 6X 6X 8X 8X'
@@ -78,14 +80,40 @@ module.exports.hands = [
   },
 
   // QUINTS
-  {
-    title: '1223 22222 22222 (Any 3 Consec. Nos; Pr. Any No in Run; Pr. & Quints Match',
+  /*{
+    title: '1223 22222 22222 (Any 3 Consec. Nos; Pr. Any No in Run; Pr. & Quints Match)',
     permutations: [
       'TX UX UX VX UY UY UY UY UY UZ UZ UZ UZ UZ',
       'TX UX VX VX VY VY VY VY VY VZ VZ VZ VZ VZ',
       'TX TX UX VX TY TY TY TY TY TZ TZ TZ TZ TZ'
     ]
   },
+  {
+    title: 'NNNNN DDDD 11111 (Quints Any Wind & Any No. in Any Suit; Kong Any Dragon)',
+    permutations: [
+      'N N N N N DX DX DX DX TX TX TX TX TX',
+      'N N N N N DX DX DX DX TY TY TY TY TY',
+      'E E E E E DX DX DX DX TX TX TX TX TX',
+      'E E E E E DX DX DX DX TY TY TY TY TX',
+      'S S S S S DX DX DX DX TX TX TX TX TX',
+      'S S S S S DX DX DX DX TY TY TY TY TY',
+      'W W W W W DX DX DX DX TX TX TX TX TX',
+      'W W W W W DX DX DX DX TY TY TY TY TY'
+    ]
+  },
+  {
+    title: 'FFFF 11111 22222 (Any 2 Suits, Any 2 Consec. Nos.)',
+    permutations: [
+      'F F F F TX TX TX TX TX UY UY UY UY UY'
+    ]
+  },
+  {
+    title: '11111 2222 33333 (Any 3 Consec. Nos.; Kong Middle No. Only)',
+    permutations: [
+      'TX TX TX TX TX UX UX UX UX VX VX VX VX VX'
+    ]
+  },*/
+
 
   // CONSECUTIVE RUN
   {

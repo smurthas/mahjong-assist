@@ -8,7 +8,6 @@ function Card(card) {
     } else if (hand.permutations instanceof Array) {
       var perms = [];
       hand.permutations.forEach(function(permString) {
-        console.error('permString', permString);
         perms = perms.concat(lib.generatePermutations(permString));
       });
       hand.permutations = perms;

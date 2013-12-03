@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <title>Mahjong Helper</title>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="js/lib.js"></script>
+    <script src="js/main.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-8" >
+          <h2>Your Rack</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-11" id="your-rack" >
+        </div>
+        <div class="col-md-5" >
+    <!-- Button trigger modal -->
+          <button class="btn btn-default" data-toggle="modal"
+            data-target="#myModal" >Add Tile</button>
+          <button class="btn btn-default" data-toggle="modal"
+            data-target="#removeTileModal" >Remove Tile</button>
+        </div>
+      </div>
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-8" >
+          <h2>Best Hands</h2>
+        </div>
+      </div>
+      <div id="best-hands">
+      </div>
+    </div>
+
+
+    <!-- Add Tile Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Add a Tile</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-1 col-rack">1B</div>
+              <div class="col-md-1 col-rack">2B</div>
+              <div class="col-md-1 col-rack">3B</div>
+              <div class="col-md-1 col-rack">4B</div>
+              <div class="col-md-1 col-rack">5B</div>
+              <div class="col-md-1 col-rack">6B</div>
+              <div class="col-md-1 col-rack">7B</div>
+              <div class="col-md-1 col-rack">8B</div>
+              <div class="col-md-1 col-rack">9B</div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1 col-rack">GD</div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1 col-rack">N</div>
+              <div class="col-md-1 col-rack">W</div>
+            </div>
+            <div class="row">
+              <div class="col-md-1 col-rack">1D</div>
+              <div class="col-md-1 col-rack">2D</div>
+              <div class="col-md-1 col-rack">3D</div>
+              <div class="col-md-1 col-rack">4D</div>
+              <div class="col-md-1 col-rack">5D</div>
+              <div class="col-md-1 col-rack">6D</div>
+              <div class="col-md-1 col-rack">7D</div>
+              <div class="col-md-1 col-rack">8D</div>
+              <div class="col-md-1 col-rack">9D</div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1 col-rack">0</div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1 col-rack">E</div>
+              <div class="col-md-1 col-rack">S</div>
+            </div>
+            <div class="row">
+              <div class="col-md-1 col-rack">1K</div>
+              <div class="col-md-1 col-rack">2K</div>
+              <div class="col-md-1 col-rack">3K</div>
+              <div class="col-md-1 col-rack">4K</div>
+              <div class="col-md-1 col-rack">5K</div>
+              <div class="col-md-1 col-rack">6K</div>
+              <div class="col-md-1 col-rack">7K</div>
+              <div class="col-md-1 col-rack">8K</div>
+              <div class="col-md-1 col-rack">9K</div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1 col-rack">RD</div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1 col-rack">F</div>
+            </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Remove Tile Modal -->
+    <div class="modal fade" id="removeTileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Remove a Tile</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+            </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

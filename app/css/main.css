@@ -1,0 +1,25 @@
+.col-rack {
+  font-size: 20px;
+  text-align: center;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 15px;
+  border: 1px solid #777;
+  border-radius: 3px;
+  margin-left: 2px;
+  margin-right: 2px;
+  height: 60px;
+}
+
+.non-matched-tile {
+  opacity: 0.3;
+}
+
+.modal-dialog {
+  width: 750px;
+}
+
+.modal-body .row {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}

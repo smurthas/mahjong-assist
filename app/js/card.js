@@ -1,3 +1,27 @@
+require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"5SoMHA":[function(require,module,exports){
+
+var lib = require('./lib.js');
+
+function Card(card) {
+  card.forEach(function(hand) {
+    if (typeof hand.permutations === 'string') {
+      hand.permutations = lib.generatePermutations(hand.permutations);
+    } else if (hand.permutations instanceof Array) {
+      var perms = [];
+      hand.permutations.forEach(function(permString) {
+        perms = perms.concat(lib.generatePermutations(permString));
+      });
+      hand.permutations = perms;
+    }
+  });
+  return card;
+}
+
+module.exports = Card;
+
+},{"./lib.js":3}],"./card":[function(require,module,exports){
+module.exports=require('5SoMHA');
+},{}],3:[function(require,module,exports){
 var parseRack = require('./rack.js').parseRack;
 var SUIT_PERMS = ['BDK', 'BKD','DBK', 'DKB', 'KBD', 'KDB'];
 
@@ -247,7 +271,9 @@ exports.countsForRack = function(card, rack) {
   return handMatches;
 };
 
-exports.matchingIndices = function(rack, matchingTiles) {
+exports.printRack = function printRack(rack, matchingTiles) {
+  var topLine = '', bottomLine = '';
+
   var matchedIndices = [];
   if (matchingTiles) {
     matchingTiles.forEach(function(matchedTile) {
@@ -265,13 +291,6 @@ exports.matchingIndices = function(rack, matchingTiles) {
       }
     });
   }
-  return matchedIndices;
-}
-
-exports.printRack = function printRack(rack, matchingTiles) {
-  var topLine = '', bottomLine = '';
-
-  var matchedIndices = exports.matchingIndices(rack, matchingTiles);
 
   for (var i in rack) {
     var suit = rack[i].suit;
@@ -288,3 +307,54 @@ exports.printRack = function printRack(rack, matchingTiles) {
   console.log(topLine);
   console.log(bottomLine);
 }
+
+},{"./rack.js":4}],4:[function(require,module,exports){
+module.exports.parseRack = function(rackString) {
+  rackString = rackString.toUpperCase();
+  var tiles = [];
+  var tileChars = rackString.split(' ');
+  for (var i in tileChars) {
+    var tile = {};
+    switch(tileChars[i]) {
+      case 'F':
+        tile.value = 'F';
+        tile.suit = 'F';
+        break;
+
+      case 'N':
+      case 'E':
+      case 'W':
+      case 'S':
+        tile.value = tileChars[i];
+        tile.suit = 'W';
+        break;
+
+      case 'GD':
+      case 'DB':
+        tile.value = 'D';
+        tile.suit = 'B';
+        break;
+      case 'RD':
+      case 'DK':
+        tile.value = 'D';
+        tile.suit = 'K';
+        break;
+      case 'BD':
+      case 'DD':
+      case '0':
+        tile.value = 'D';
+        tile.suit = 'D';
+        break;
+
+      default:
+        tile.value = parseInt(tileChars[i][0]);
+        tile.suit = tileChars[i][1];
+        break;
+    }
+    tiles.push(tile);
+  }
+  return tiles;
+}
+
+},{}]},{},[])
+;

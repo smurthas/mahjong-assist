@@ -38,7 +38,7 @@ function generateBestHandHTML(title, permutation, matched) {
   return html;
 }
 function updateBestHands(rack, number) {
-  if (!number) number = 3;
+  if (!number) number = 4;
   var counts = lib.countsForRack(ourCard, rack);
   console.log('counts', counts);
   $('#best-hands').html('');
@@ -55,7 +55,7 @@ function updateRack(rack, selector) {
   $(selector).html(html);
 }
 
-var myRack;
+var myRack = [];
 
 function addTile(tile) {
   myRack.push(tile);
@@ -77,18 +77,19 @@ function removeTile(tile) {
 }
 
 $(function() {
-  myRack = parseRack('F F N N');
+  /*myRack = parseRack('F F N N');
   updateRack(myRack);
   updateRack(myRack, '#removeTileModal .row');
-  updateBestHands(myRack);
+  updateBestHands(myRack);*/
   //var rack = parseRack('F F N N E E 2K 0 1K 3K 1B 3D GD RD');
   //updateBestHands(rack, 8);
 
+  $("#myModal").modal('show');
   $("#myModal .col-rack").click(function(e, a) {
     var tileText = $(e.target).text();
     var tile = parseRack(tileText)[0];
-    $('#myModal').modal('hide')
     addTile(tile);
+    if (myRack && myRack.length === 14) $('#myModal').modal('hide');
   });
 
   $(document).on('click','#removeTileModal .col-rack', function(e) {

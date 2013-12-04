@@ -200,9 +200,76 @@ module.exports.hands = [
 
   // WINDS - DRAGONS
   {
+    title: 'NNNN EEEE WWWW SS',
+    permutations: 'N N N N E E E E W W W W S S'
+  },
+  {
     title: 'FF DDDD NEWS DDDD (Any 2 Drangons)',
     permutations: 'F F DX DX DX DX N E W S DY DY DY DY'
   },
+  {
+    title: 'NNNN SSSS 111 111',
+    permutations: [
+      'N N N N S S S S 1X 1X 1X 1X 1X 1X',
+      'N N N N S S S S 3X 3X 3X 3X 3X 3X',
+      'N N N N S S S S 5X 5X 5X 5X 5X 5X',
+      'N N N N S S S S 7X 7X 7X 7X 7X 7X',
+      'N N N N S S S S 9X 9X 9X 9X 9X 9X'
+    ]
+  },
+  {
+    title: 'EEEE WWWW 222 222',
+    permutations: [
+      'E E E E W W W W 2X 2X 2X 2X 2X 2X',
+      'E E E E W W W W 4X 4X 4X 4X 4X 4X',
+      'E E E E W W W W 6X 6X 6X 6X 6X 6X',
+      'E E E E W W W W 8X 8X 8X 8X 8X 8X'
+    ]
+  },
+  {
+    title: 'FF NNNN EE WW SSSS',
+    permutations: 'F F N N N N E E W W S S S S'
+  },
+  {
+    title: 'FFFF DDDD DD DDDD',
+    permutations: 'F F F F DX DX DX DX DY DY DZ DZ DZ DZ'
+  },
+
+  // 369
+  {
+    title: 'FF 333 66 999 DDDD',
+    permutations: 'F F 3X 3X 3X 6X 6X 9X 9X 9X DX DX DX DX'
+  },
+  {
+    title: '333 6666 666 9999 (Any 2 Suits)',
+    permutations: '3X 3X 3X 6X 6X 6X 6X 6Y 6Y 6Y 9Y 9Y 9Y 9Y'
+  },
+  {
+    title: '333 666 9999 9999 (Any 3 Suits)',
+    permutations: '3X 3X 3X 6X 6X 6X 9Y 9Y 9Y 9Y 9Z 9Z 9Z 9Z'
+  },
+  {
+    title: 'FF 3333 6666 9999 or FF 3333 6666 9999 (Any 3 Suits)',
+    permutations: [
+      'F F 3X 3X 3X 3X 6X 6X 6X 6X 9X 9X 9X 9X',
+      'F F 3X 3X 3X 3X 6Y 6Y 6Y 6Y 9Z 9Z 9Z 9Z'
+    ]
+  },
+  {
+    title: '33 666 33 666 9999 (Any 3 Suits, Kong 9s)',
+    permutations: [
+      '3X 3X 6X 6X 6X 3Y 3Y 6Y 6Y 6Y 9Z 9Z 9Z 9Z'
+    ]
+  },
+  {
+    title: '33 66 33 66 99 3333 (Any 3 Suits, Kong 3, 6, or 9)',
+    permutations: [
+      '3X 3X 6X 6X 3Y 3Y 6Y 6Y 9Y 9Y 3Z 3Z 3Z 3Z',
+      '3X 3X 6X 6X 3Y 3Y 6Y 6Y 9Y 9Y 6Z 6Z 6Z 6Z',
+      '3X 3X 6X 6X 3Y 3Y 6Y 6Y 9Y 9Y 9Z 9Z 9Z 9Z'
+    ]
+  },
+
 
   // SINGLES AND PAIRS
   {

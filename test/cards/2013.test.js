@@ -305,6 +305,44 @@ module.exports = [
   },
   {
     mahjong: [
+      '1B 1B 1B 2B 2B 2B 2B 3K 3K 3K 4K 4K 4K 4K',
+      '4B 4B 4B 5B 5B 5B 5B 6K 6K 6K 7K 7K 7K 7K'
+    ],
+    counts: [
+      {
+        rack: '1B 1B 2B 7K 5B 4D 4D 5B 3D 8B 6K 3K 1B F',
+        count: 7
+      }
+    ],
+    permutations: 6*6
+  },
+  {
+    mahjong: [
+      'F F F F 1B 1B 1B 1B 2B 2B 2B 2B DB DB'
+    ],
+    counts: [
+      {
+        rack: '1D 1D 2D 7K 5B 4D 4D 5B 3D 8B 6K 3K 1D F',
+        count: 5
+      }
+    ],
+    permutations: 8*3
+  },
+  {
+    mahjong: [
+      '1B 1B 1B 1B 2D 2D 2B 2B 2K 2K 3B 3B 3B 3B'
+    ],
+    counts: [
+      {
+        rack: '1D 1D 2D 7K 1B 4D 4D 5B 3D 8B 7K 3K 1D F',
+        count: 5
+      }
+    ],
+    permutations: 6*7
+  },
+
+  {
+    mahjong: [
       '1B 1B 3B 3B 3B 5B 5B 5B 5B 7B 7B 7B 9B 9B'
     ],
     counts: [

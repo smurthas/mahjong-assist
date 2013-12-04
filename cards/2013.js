@@ -49,11 +49,11 @@ module.exports.hands = [
   // LIKE NUMBERS
   {
     title: 'FF 1111 1111 1111 (Any Like No.)',
-    permutations: 'F F TX TX TX TX TY TY TY TY TZ TZ TZ TZ'
+    permutations: 'F F tX tX tX tX tY tY tY tY tZ tZ tZ tZ'
   },
   {
     title: '11 DD 111 DDD 1111 (Any Like No., Matching Dragon)',
-    permutations: 'TX TX DX DX TY TY TY DY DY DY TZ TZ TZ TZ'
+    permutations: 'tX tX DX DX tY tY tY DY DY DY tZ tZ tZ tZ'
   },
 
   // SEVEN HANDS
@@ -83,34 +83,34 @@ module.exports.hands = [
   /*{
     title: '1223 22222 22222 (Any 3 Consec. Nos; Pr. Any No in Run; Pr. & Quints Match)',
     permutations: [
-      'TX UX UX VX UY UY UY UY UY UZ UZ UZ UZ UZ',
-      'TX UX VX VX VY VY VY VY VY VZ VZ VZ VZ VZ',
-      'TX TX UX VX TY TY TY TY TY TZ TZ TZ TZ TZ'
+      'tX uX uX vX uY uY uY uY uY uZ uZ uZ uZ uZ',
+      'tX uX vX vX vY vY vY vY vY vZ vZ vZ vZ vZ',
+      'tX tX uX vX tY tY tY tY tY tZ tZ tZ tZ tZ'
     ]
   },
   {
     title: 'NNNNN DDDD 11111 (Quints Any Wind & Any No. in Any Suit; Kong Any Dragon)',
     permutations: [
-      'N N N N N DX DX DX DX TX TX TX TX TX',
-      'N N N N N DX DX DX DX TY TY TY TY TY',
-      'E E E E E DX DX DX DX TX TX TX TX TX',
-      'E E E E E DX DX DX DX TY TY TY TY TX',
-      'S S S S S DX DX DX DX TX TX TX TX TX',
-      'S S S S S DX DX DX DX TY TY TY TY TY',
-      'W W W W W DX DX DX DX TX TX TX TX TX',
-      'W W W W W DX DX DX DX TY TY TY TY TY'
+      'N N N N N DX DX DX DX tX tX tX tX tX',
+      'N N N N N DX DX DX DX tY tY tY tY tY',
+      'E E E E E DX DX DX DX tX tX tX tX tX',
+      'E E E E E DX DX DX DX tY tY tY tY tX',
+      'S S S S S DX DX DX DX tX tX tX tX tX',
+      'S S S S S DX DX DX DX tY tY tY tY tY',
+      'W W W W W DX DX DX DX tX tX tX tX tX',
+      'W W W W W DX DX DX DX tY tY tY tY tY'
     ]
   },
   {
     title: 'FFFF 11111 22222 (Any 2 Suits, Any 2 Consec. Nos.)',
     permutations: [
-      'F F F F TX TX TX TX TX UY UY UY UY UY'
+      'F F F F tX tX tX tX tX uY uY uY uY uY'
     ]
   },
   {
     title: '11111 2222 33333 (Any 3 Consec. Nos.; Kong Middle No. Only)',
     permutations: [
-      'TX TX TX TX TX UX UX UX UX VX VX VX VX VX'
+      'tX tX tX tX tX uX uX uX uX vX vX vX vX vX'
     ]
   },*/
 
@@ -124,6 +124,19 @@ module.exports.hands = [
     ]
   },
   {
+    title: '111 2222 333 4444 (Any 2 Suits,  Any 4 Consec. Nos.)',
+    permutations: 'tX tX tX uX uX uX uX vY vY vY wY wY wY wY'
+  },
+  {
+    title: 'FFFF 1111 2222 DD (Any 2 Consec. Nos.)',
+    permutations: 'F F F F tX tX tX tX uX uX uX uX DX DX'
+  },
+  {
+    title: '1111 22 22 22 3333 (Any 3 Consec. Nos. Like Pairs Middle No. Only)',
+    permutations: 'tX tX tX tX uY uY uX uX uZ uZ vX vX vX vX'
+  },
+
+  {
     title: '11 333 5555 777 99',
     permutations: '1X 1X 3X 3X 3X 5X 5X 5X 5X 7X 7X 7X 9X 9X'
   },
@@ -133,7 +146,7 @@ module.exports.hands = [
   },
   {
     title: 'NN EE WW SS 11 22 33 (Any 3 Consec. Nos.)',
-    permutations: 'N N E E W W S S TX TX UX UX VX VX'
+    permutations: 'N N E E W W S S tX tX uX uX vX vX'
   },
   {
     title: 'FF DDDD NEWS DDDD (Any 2 Drangons)',

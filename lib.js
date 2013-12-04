@@ -159,7 +159,7 @@ exports.generatePermutations = function(base) {
   ['X','Y','Z'].forEach(function(letter) {
     if (base.indexOf(letter) !== -1) suitPermCount++;
   });
-  ['T','U','V'].forEach(function(letter) {
+  ['t','u','v','w'].forEach(function(letter) {
     if (base.indexOf(letter) !== -1) numberCount++;
   });
 
@@ -172,7 +172,8 @@ exports.generatePermutations = function(base) {
   } else if (suitPermCount === 1) {
     for (var i = 1; i < N; i++) {
       for (var j in SUIT_PERMS[0]) {
-        var p = base.replace(/T/g, i).replace(/U/g, i+1).replace(/V/g, i+2);
+        var p = base.replace(/t/g, i).replace(/u/g, i+1).replace(/v/g, i+2)
+          .replace(/w/g, i+3);
         p = p.replace(/X/g, SUIT_PERMS[0][j]);
         perms.push(parseRack(p));
       }
@@ -180,7 +181,8 @@ exports.generatePermutations = function(base) {
   } else {
     for (var i = 1; i < N; i++) {
       for (var j in SUIT_PERMS) {
-        var p = base.replace(/T/g, i).replace(/U/g, i+1).replace(/V/g, i+2);
+        var p = base.replace(/t/g, i).replace(/u/g, i+1).replace(/v/g, i+2)
+          .replace(/w/g, i+3);
         p = p.replace(/X/g, SUIT_PERMS[j][0]).replace(/Y/g, SUIT_PERMS[j][1])
              .replace(/Z/g, SUIT_PERMS[j][2]);
         perms.push(parseRack(p));

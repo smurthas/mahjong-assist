@@ -135,6 +135,14 @@ module.exports.hands = [
     title: '1111 22 22 22 3333 (Any 3 Consec. Nos. Like Pairs Middle No. Only)',
     permutations: 'tX tX tX tX uY uY uX uX uZ uZ vX vX vX vX'
   },
+  {
+    title: 'FF 1111 2222 3333 (Any 3 Suits, Any 3 Consec. Nos.)',
+    permutations: 'F F tX tX tX tX uY uY uY uY vZ vZ vZ vZ'
+  },
+  {
+    title: '111 222 333 444 DD (Any 3 Suits, Any 2 Consec. Nos; Pair Dr. 3rd Suit)',
+    permutations: 'tX tX tX uX uX uX vY vY vY wY wY wY DZ DZ'
+  },
 
   {
     title: '11 333 5555 777 99',

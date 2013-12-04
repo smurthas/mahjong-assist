@@ -144,10 +144,67 @@ module.exports.hands = [
     permutations: 'tX tX tX uX uX uX vY vY vY wY wY wY DZ DZ'
   },
 
+  // 13579
   {
     title: '11 333 5555 777 99',
     permutations: '1X 1X 3X 3X 3X 5X 5X 5X 5X 7X 7X 7X 9X 9X'
   },
+  {
+    title: '111 3333 333 5555 or 555 7777 777 9999 (Any 2 Suits)',
+    permutations: [
+      '1X 1X 1X 3X 3X 3X 3X 3Y 3Y 3Y 5Y 5Y 5Y 5Y',
+      '5X 5X 5X 7X 7X 7X 7X 7Y 7Y 7Y 9Y 9Y 9Y 9Y'
+    ]
+  },
+  {
+    title: 'FFFF 1111 33 5555  or FFFF 5555 77 9999',
+    permutations: [
+      'F F F F 1X 1X 1X 1X 3X 3X 5X 5X 5X 5X',
+      'F F F F 5X 5X 5X 5X 7X 7X 9X 9X 9X 9X'
+    ]
+  },
+  {
+    title: '11 333 DDDD 333 55 or 55 777 DDDD 777 99',
+    permutations: [
+      '1X 1X 3X 3X 3X DY DY DY DY 3Z 3Z 3Z 5Z 5Z',
+      '5X 5X 7X 7X 7X DY DY DY DY 7Z 7Z 7Z 9Z 9Z'
+    ]
+  },
+  {
+    title: '1111 33 55 77 9999 (Any 2 Suits)',
+    permutations: '1X 1X 1X 1X 3Y 3Y 5Y 5Y 7Y 7Y 9X 9X 9X 9X'
+  },
+  {
+    title: '11 33 11 33 55 1111 (Any 3 Suits, Kong 1, 3, or 5',
+    permutations: [
+      '1X 1X 3X 3X 1Y 1Y 3Y 3Y 5Y 5Y 1Z 1Z 1Z 1Z',
+      '1X 1X 3X 3X 1Y 1Y 3Y 3Y 5Y 5Y 3Z 3Z 3Z 3Z',
+      '1X 1X 3X 3X 1Y 1Y 3Y 3Y 5Y 5Y 5Z 5Z 5Z 5Z'
+    ]
+  },
+  {
+    title: '55 77 55 77 99 5555 (Any 3 Suits, Kong 5, 7, or 9)',
+    permutations: [
+      '5X 5X 7X 7X 5Y 5Y 7Y 7Y 9Y 9Y 5Z 5Z 5Z 5Z',
+      '5X 5X 7X 7X 5Y 5Y 7Y 7Y 9Y 9Y 7Z 7Z 7Z 7Z',
+      '5X 5X 7X 7X 5Y 5Y 7Y 7Y 9Y 9Y 9Z 9Z 9Z 9Z'
+    ]
+  },
+  {
+    title: '111 3 555 111 3 555 or 555 7 999 555 7 999 (Any 2 Suits)',
+    permutations: [
+      '1X 1X 1X 3X 5X 5X 5X 1Z 1Z 1Z 3Z 5Z 5Z 5Z',
+      '5X 5X 5X 7X 9X 9X 9X 5Z 5Z 5Z 7Z 9Z 9Z 9Z'
+    ]
+  },
+
+  // WINDS - DRAGONS
+  {
+    title: 'FF DDDD NEWS DDDD (Any 2 Drangons)',
+    permutations: 'F F DX DX DX DX N E W S DY DY DY DY'
+  },
+
+  // SINGLES AND PAIRS
   {
     title: 'FF 11 22 33 44 55 DD',
     permutations: 'F F 1X 1X 2X 2X 3X 3X 4X 4X 5X 5X DX DX'
@@ -155,9 +212,5 @@ module.exports.hands = [
   {
     title: 'NN EE WW SS 11 22 33 (Any 3 Consec. Nos.)',
     permutations: 'N N E E W W S S tX tX uX uX vX vX'
-  },
-  {
-    title: 'FF DDDD NEWS DDDD (Any 2 Drangons)',
-    permutations: 'F F DX DX DX DX N E W S DY DY DY DY'
   }
 ];

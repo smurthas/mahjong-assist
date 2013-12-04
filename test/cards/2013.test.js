@@ -365,6 +365,7 @@ module.exports = [
     permutations: 6*6
   },
 
+  // 13579
   {
     mahjong: [
       '1B 1B 3B 3B 3B 5B 5B 5B 5B 7B 7B 7B 9B 9B'
@@ -377,6 +378,112 @@ module.exports = [
     ],
     permutations: 3
   },
+  {
+    mahjong: [
+      '1B 1B 1B 3B 3B 3B 3B 3D 3D 3D 5D 5D 5D 5D',
+      '5B 5B 5B 7B 7B 7B 7B 7D 7D 7D 9D 9D 9D 9D'
+    ],
+    counts: [
+      {
+        rack: '1B 1B 5K 3B 3B 5D 5D 9B 8B 7B 7B 7B 9B 9B',
+        count: 8
+      }
+    ],
+    permutations: 6*2
+  },
+  {
+    mahjong: [
+      'F F F F 1B 1B 1B 1B 3B 3B 5B 5B 5B 5B',
+      'F F F F 5D 5D 5D 5D 7D 7D 9D 9D 9D 9D',
+    ],
+    counts: [
+      {
+        rack: 'F F F 1B 1B 5K 5D 9B 8B 7B 7B 7B 9B 9B',
+        count: 8
+      }
+    ],
+    permutations: 3*2
+  },
+  {
+    mahjong: [
+      '1B 1B 3B 3B 3B DD DD DD DD 3K 3K 3K 5K 5K',
+      '5B 5B 7B 7B 7B DD DD DD DD 7K 7K 7K 9K 9K',
+    ],
+    counts: [
+      {
+        rack: 'F F F 1B 1B 5K 5D 9B 8B 7B 7B 7B 9B 9B',
+        count: 6
+      }
+    ],
+    permutations: 6*2
+  },
+  {
+    mahjong: [
+      '1B 1B 1B 1B 3K 3K 5K 5K 7K 7K 9B 9B 9B 9B'
+    ],
+    counts: [
+      {
+        rack: 'F F F 1B 1B 5K 5D 9B 8B 7B 7B 7B 9B 9B',
+        count: 6
+      }
+    ],
+    permutations: 6
+  },
+  {
+    mahjong: [
+      '1B 1B 3B 3B 1K 1K 3K 3K 5K 5K 1D 1D 1D 1D',
+      '1B 1B 3B 3B 1K 1K 3K 3K 5K 5K 5D 5D 5D 5D'
+    ],
+    counts: [
+      {
+        rack: 'F F W 1B 1B 5D 5D 9B 8B 5B 3B 7B 9B 9B',
+        count: 6
+      }
+    ],
+    permutations: 6*3
+  },
+  {
+    mahjong: [
+      '5B 5B 7B 7B 5K 5K 7K 7K 9K 9K 5D 5D 5D 5D',
+      '5B 5B 7B 7B 5K 5K 7K 7K 9K 9K 9D 9D 9D 9D'
+    ],
+    counts: [
+      {
+        rack: 'F F W 1B 1B 5D 5D 9B 8B 5B 3B 7B 9B 9B',
+        count: 6
+      }
+    ],
+    permutations: 6*3
+  },
+  {
+    mahjong: [
+      '1B 1B 1B 3B 5B 5B 5B 1K 1K 1K 3K 5K 5K 5K',
+      '5B 5B 5B 7B 9B 9B 9B 5K 5K 5K 7K 9K 9K 9K'
+    ],
+    counts: [
+      {
+        rack: 'F F W 1B 1B 5D 5D 9B 8B 5B 3B 7B 9B 9B',
+        count: 7
+      }
+    ],
+    permutations: 6*2
+  },
+
+  // WINDS - DRAGONS
+  {
+    mahjong: [
+      'F F 0 0 0 0 N E W S RD RD RD RD'
+    ],
+    counts: [
+      {
+        rack: 'F F DD DD N E S RD RD RD 1K 2K 3K 4D',
+        count: 10
+      }
+    ],
+    permutations: 6
+  },
+
+  // SINGLES AND PAIRS
   {
     mahjong: [
       'F F 1B 1B 2B 2B 3B 3B 4B 4B 5B 5B GD GD'
@@ -403,16 +510,4 @@ module.exports = [
     ],
     permutations: 7*3
   },
-  {
-    mahjong: [
-      'F F 0 0 0 0 N E W S RD RD RD RD'
-    ],
-    counts: [
-      {
-        rack: 'F F DD DD N E S RD RD RD 1K 2K 3K 4D',
-        count: 10
-      }
-    ],
-    permutations: 6
-  }
 ];

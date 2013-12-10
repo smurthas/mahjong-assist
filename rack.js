@@ -5,7 +5,14 @@ module.exports.parseRack = function(rackString) {
   for (var i in tileChars) {
     var tile = {};
     switch(tileChars[i]) {
+      case 'J':
+      case 'JJ':
+        tile.value = 'J';
+        tile.suit = 'J';
+        break;
+
       case 'F':
+      case 'FF':
         tile.value = 'F';
         tile.suit = 'F';
         break;
@@ -14,7 +21,11 @@ module.exports.parseRack = function(rackString) {
       case 'E':
       case 'W':
       case 'S':
-        tile.value = tileChars[i];
+      case 'NW':
+      case 'EW':
+      case 'WW':
+      case 'SW':
+        tile.value = tileChars[i].substring(0,1);
         tile.suit = 'W';
         break;
 

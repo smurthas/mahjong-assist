@@ -1,7 +1,7 @@
 var parseRack = require('./rack.js').parseRack;
 
 function TileSet() {
-  var tiles = parseRack('F F F F F F F F');
+  var tiles = parseRack('F F F F F F F F J J J J J J J J');
   for (var i = 0; i < 4; i++) {
     tiles = tiles.concat(parseRack('N E W S'));
     ['B', 'D', 'K'].forEach(function(suit) {

@@ -40,16 +40,23 @@ function Game(playersTypes) {
           } else {
             console.log('player %d got mahjong after %d turns!',
                 currentPlayerNumber, turns);
-            return true;
+            break;
           }
         }
 
         // notify the other players of the discard
         for (var i = 1; i < players.length; i++) {
-          var nextPlayer = players[(currentPlayerNumber + i) % players.length];
+          var nextPlayerNumber = (currentPlayerNumber + i) % players.length;
+          var nextPlayer = players[nextPlayerNumber];
           if (typeof nextPlayer.onDiscard === 'function') {
             var call = nextPlayer.onDiscard(discard);
             if (call) {
+              // can only call for mahjong right now, TODO all call types
+              if (calcCount(nextPlayer.tiles.concat([discard])) === 14) {
+                console.log('player %d called for mahjong after %d turns!',
+                    nextPlayerNumber, turns);
+                break;
+              }
               throw new Error('not supported');
             }
           }
@@ -61,10 +68,11 @@ function Game(playersTypes) {
         currentPlayerNumber = (currentPlayerNumber + 1) % players.length;
       } while(tileSet.tiles.length > 0);
       for (var i in players) {
-        console.log('player %d ended with %d highest count', i,
+        console.log('\nplayer %d ended with %d highest count', i,
             calcCount(players[i].tiles));
+        printBestHand(players[i].tiles);
       }
-      console.log('game ended without anyone getting mahjong.');
+      //console.log('game ended without anyone getting mahjong.');
       return false;
     }
   };
@@ -81,7 +89,8 @@ function printBestHand(rack) {
 
 function calcCount(rack) {
   var counts = lib.countsForRack(ourCard, rack);
-  return counts[0].matches[0].matched.length;
+  var count = counts[0].matches[0].matched.length;
+  return count;
 }
 
 var game = new Game([RandoPlayer, RandoPlayer, GreedyPlayer, LockInPlayer]);

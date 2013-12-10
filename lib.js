@@ -192,6 +192,32 @@ exports.generatePermutations = function(base) {
   return perms;
 }
 
+function countByExactTile(tiles) {
+  var counts = {};
+  tiles.forEach(function(tile) {
+    var key = tile.value + tile.suit;
+    if (!counts[key]) counts[key] = 0;
+    counts[key]++;
+  });
+  return counts;
+}
+
+function getJokerEligibleCount(hand, matched) {
+  var handCounts = countByExactTile(hand);
+  var matchedCounts = countByExactTile(matched);
+  var total = 0;
+  for (var tile in handCounts) {
+    // no singles or pairs
+    if (handCounts[tile] > 2) {
+      // add in the hand count
+      total += handCounts[tile];
+      // subtract out space we've already used up with real tiles
+      if (matchedCounts[tile]) total -= matchedCounts[tile];
+    }
+  }
+  return total;
+}
+
 exports.matchingTiles = function(_rack, hand) {
   // collect the results here
   var matchingTiles = [];
@@ -206,11 +232,20 @@ exports.matchingTiles = function(_rack, hand) {
     for (var j in rack) {
       // if it's a match, add the tile to the matching set and remove it from
       // the rack so it doesn't get matched twice
+      // dumb with jokers for now, TODO improve it
       if (rack[j].suit === hand[i].suit && rack[j].value === hand[i].value) {
         matchingTiles.push(rack[j]);
         rack.splice(j, 1);
         break;
       }
+    }
+  }
+
+  var jokerEligibleCount = getJokerEligibleCount(hand, matchingTiles);
+  for (var i = 0; i < rack.length && jokerEligibleCount > 0; i++) {
+    if (rack[i].suit === 'J') {
+      matchingTiles.push(rack[i]);
+      jokerEligibleCount--;
     }
   }
 

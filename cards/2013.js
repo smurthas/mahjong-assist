@@ -9,7 +9,8 @@ module.exports.hands = [
   // 2013
   {
     title: 'N EE WWW SSSS 2013',
-    permutations: 'N E E W W W S S S S 2X 0 1X 3X'
+    permutations: 'N E E W W W S S S S 2X 0 1X 3X',
+    noJokers: 'N E E 2X 0 1X 3X'
   },
   {
     title: 'FF 2013 1111 3333 (Any 3 Suits)',
@@ -80,7 +81,7 @@ module.exports.hands = [
   },
 
   // QUINTS
-  /*{
+  {
     title: '1223 22222 22222 (Any 3 Consec. Nos; Pr. Any No in Run; Pr. & Quints Match)',
     permutations: [
       'tX uX uX vX uY uY uY uY uY uZ uZ uZ uZ uZ',
@@ -112,12 +113,12 @@ module.exports.hands = [
     permutations: [
       'tX tX tX tX tX uX uX uX uX vX vX vX vX vX'
     ]
-  },*/
+  },
 
 
   // CONSECUTIVE RUN
   {
-    title: '11 222 3333 4444 55 or 55 666 7777 888 99',
+    title: '11 222 3333 444 55 or 55 666 7777 888 99',
     permutations: [
       '1X 1X 2X 2X 2X 3X 3X 3X 3X 4X 4X 4X 5X 5X',
       '5X 5X 6X 6X 6X 7X 7X 7X 7X 8X 8X 8X 9X 9X'
@@ -273,11 +274,49 @@ module.exports.hands = [
 
   // SINGLES AND PAIRS
   {
+    title: 'NN EE WW SS 11 22 33 (Any 3 Consec. Nos.)',
+    permutations: 'N N E E W W S S tX tX uX uX vX vX'
+  },
+  {
     title: 'FF 11 22 33 44 55 DD',
     permutations: 'F F 1X 1X 2X 2X 3X 3X 4X 4X 5X 5X DX DX'
   },
   {
-    title: 'NN EE WW SS 11 22 33 (Any 3 Consec. Nos.)',
-    permutations: 'N N E E W W S S tX tX uX uX vX vX'
+    title: '11 33 55 77 99 11 11 (Any Like Odd No. in Other 2 Suits)',
+    permutations: [
+      '1X 1X 3X 3X 5X 5X 7X 7X 9X 9X 1Y 1Y 1Z 1Z',
+      '1X 1X 3X 3X 5X 5X 7X 7X 9X 9X 3Y 3Y 3Z 3Z',
+      '1X 1X 3X 3X 5X 5X 7X 7X 9X 9X 5Y 5Y 5Z 5Z',
+      '1X 1X 3X 3X 5X 5X 7X 7X 9X 9X 7Y 7Y 7Z 7Z',
+      '1X 1X 3X 3X 5X 5X 7X 7X 9X 9X 9Y 9Y 9Z 9Z',
+    ]
+  },
+  {
+    title: 'FF 22 44 66 88 22 22 (Any Like Even No. in Other 2 Suits)',
+    permutations: [
+      'F F 2X 2X 4X 4X 6X 6X 8X 8X 2Y 2Y 2Z 2Z',
+      'F F 2X 2X 4X 4X 6X 6X 8X 8X 4Y 4Y 4Z 4Z',
+      'F F 2X 2X 4X 4X 6X 6X 8X 8X 6Y 6Y 6Z 6Z',
+      'F F 2X 2X 4X 4X 6X 6X 8X 8X 8Y 8Y 8Z 8Z',
+    ]
+  },
+  {
+    title: 'FF 11 22 11 22 11 22 (Any 2 Consec Nos in 3 Suits)',
+    permutations: [
+      'F F tX tX uX uX tY tY uY uY tZ tZ uZ uZ',
+    ]
+  },
+  {
+    title: '998 99887 998877 (Any 3 Suits, These Nos. Only)',
+    permutations: [
+      '9X 9X 8X 9Y 9Y 8Y 8Y 7Y 9Z 9Z 8Z 8Z 7Z 7Z',
+    ]
+  },
+  {
+    title: 'FF 2013 2013 2013 (3 Suits)',
+    permutations: [
+      'F F 2X 0 1X 3X 2Y 0 1Y 3Y 2Z 0 1Z 3Z',
+    ]
   }
+
 ];

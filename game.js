@@ -8,6 +8,7 @@ var TileSet = require('./tileSet.js');
 var RandoPlayer = require('./players/rando.js');
 var GreedyPlayer = require('./players/greedy.js');
 var LockInPlayer = require('./players/locke.js');
+var SmartyPlayer = require('./players/smarty.js');
 
 function Game(playersTypes) {
   var self = {
@@ -26,7 +27,8 @@ function Game(playersTypes) {
         var player = players[currentPlayerNumber];
 
         // draw a tile
-        player.tiles.push(tileSet.drawTile());
+        if (typeof player.take === 'function') player.take(tileSet.drawTile());
+        else player.tiles.push(tileSet.drawTile());
 
         // discard a tile
         var discard = player.discard();
@@ -93,6 +95,6 @@ function calcCount(rack) {
   return count;
 }
 
-var game = new Game([RandoPlayer, RandoPlayer, GreedyPlayer, LockInPlayer]);
+var game = new Game([LockInPlayer, SmartyPlayer, LockInPlayer, LockInPlayer]);
 
 game.play();

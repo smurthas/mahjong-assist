@@ -14,7 +14,9 @@ function generateRackHTML(rack, matched) {
     html += '<div class="col-md-1 ' + match + 'col-rack">';
     if (tile.value !== 'D') {
       html += tile.value;
-      if (tile.suit !== 'F' && tile.suit !== 'W') html += tile.suit;
+      if (tile.suit !== 'F' && tile.suit !== 'W' && tile.suit !== 'J') {
+        html += tile.suit;
+      }
     } else {
       if (tile.suit === 'D') html += '0';
       else if (tile.suit === 'K') html += 'RD';

@@ -26,4 +26,15 @@ TileSet.prototype.drawTile = function() {
   return this.tiles.splice(index, 1)[0];
 };
 
+TileSet.prototype.removeTiles = function(tiles) {
+  for (var i in tiles) {
+    for (var j in this.tiles) {
+      if (this.tiles[j].suit === tiles[i].suit && this.tiles[j].value === tiles[i].value) {
+        this.tiles.splice(j, 1);
+        break;
+      }
+    }
+  }
+}
+
 module.exports = TileSet;

@@ -202,7 +202,7 @@ function countByExactTile(tiles) {
   return counts;
 }
 
-function getJokerEligibleCount(hand, matched) {
+exports.getJokerEligibleCount = function(hand, matched) {
   var handCounts = countByExactTile(hand);
   var matchedCounts = countByExactTile(matched);
   var total = 0;
@@ -241,7 +241,7 @@ exports.matchingTiles = function(_rack, hand) {
     }
   }
 
-  var jokerEligibleCount = getJokerEligibleCount(hand, matchingTiles);
+  var jokerEligibleCount = exports.getJokerEligibleCount(hand, matchingTiles);
   for (var i = 0; i < rack.length && jokerEligibleCount > 0; i++) {
     if (rack[i].suit === 'J') {
       matchingTiles.push(rack[i]);
@@ -252,12 +252,19 @@ exports.matchingTiles = function(_rack, hand) {
   return matchingTiles;
 }
 
-exports.checkAndSortPermutations = function(rack, permutations) {
+exports.checkAndSortPermutations = function(rack, permutations, remaining) {
   var matchingSets = [];
   permutations.forEach(function(hand) {
+    var matching = exports.matchingTiles(rack, hand);
+    var missing = [];
+    for (var i in hand) {
+      if (matching.indexOf(hand[i]) === -1) missing.push(hand[i]);
+    }
     matchingSets.push({
-      matched: exports.matchingTiles(rack, hand),
-      permutation: hand
+      matched: matching,
+      missing: missing,
+      permutation: hand,
+      P: exports.calcProbabilityOfPermutation(missing, remaining)
     });
   });
   matchingSets.sort(function(a, b) {
@@ -266,10 +273,34 @@ exports.checkAndSortPermutations = function(rack, permutations) {
   return matchingSets;
 }
 
-exports.countsForRack = function(card, rack) {
+exports.calcProbabilityOfPermutation = function(neededTiles, remainingTiles) {
+  if (!remainingTiles || remainingTiles.length < neededTiles.length) return 0;
+  var neededCounts = countByExactTile(neededTiles);
+  var remaingCounts = countByExactTile(remainingTiles);
+  var remainingTotal = remainingTiles.length;
+
+  console.error('neededCounts', neededCounts);
+  console.error('remaingCounts', remaingCounts);
+  console.error('remainingTotal', remainingTotal);
+  var p = 1;
+  for (var i in neededCounts) {
+    //if (!(neededCounts[i] < remaingCounts[i])) return 0;
+    while (neededCounts[i] > 0) {
+      p *= remaingCounts[i] / remainingTotal;
+      console.error('p', p);
+      remaingCounts[i]--;
+      neededCounts[i]--;
+      remainingTotal--;
+    }
+  }
+  return p;
+};
+
+exports.countsForRack = function(card, rack, remaining) {
   var handMatches = [];
   card.forEach(function(hand) {
-    var matches = exports.checkAndSortPermutations(rack, hand.permutations);
+    var matches = exports.checkAndSortPermutations(rack, hand.permutations,
+      remaining);
     handMatches.push({
       matches: matches,
       hand: hand
@@ -288,7 +319,7 @@ exports.matchingIndices = function(rack, matchingTiles) {
   var matchedIndices = [];
   if (matchingTiles) {
     matchingTiles.forEach(function(matchedTile) {
-      for (var i in rack) {
+      for (var i = 0; i < rack.length; i++) {
         // already matched, skip it
         if (matchedIndices.indexOf(i) !== -1) continue;
 
@@ -303,6 +334,28 @@ exports.matchingIndices = function(rack, matchingTiles) {
     });
   }
   return matchedIndices;
+}
+
+function permutations(arr) {
+  if (arr.length < 2) return arr;
+  var arrs = [];
+  for (var i = 0; i < arr.length; i++) {
+    var sub = arr.slice(0, i).concat(arr.slice(i+1, arr.length));
+    var perms = permutations(sub);
+    for (var j in perms) arrs.push([arr[i]].concat(perms[j]));
+  }
+  return arrs;
+}
+
+exports.tilePerms = function(tiles, needed, maxIndex) {
+  var perms = permutations(tiles);
+  //console.log('got perms', perms.length);
+  var mahjongCount = 0;
+  for (var i in perms) {
+    var inds = exports.matchingIndices(perms[i], needed).sort();
+    if (inds[inds.length-1] < maxIndex) mahjongCount++;
+  }
+  return mahjongCount/perms.length;
 }
 
 exports.printRack = function printRack(rack, matchingTiles) {
